@@ -1,10 +1,23 @@
 // src/components/ExperienceCard.tsx
-import React, { useState } from 'react';
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface Experience {
-  title: string;
-  company: string;
-  details: string;
+  title: {
+    en: string;
+    fr: string;
+    pt: string;
+  };
+  company: {
+    en: string;
+    fr: string;
+    pt: string;
+  };
+  details: {
+    en: string;
+    fr: string;
+    pt: string;
+  };
 }
 
 interface ExperienceCardProps {
@@ -12,18 +25,13 @@ interface ExperienceCardProps {
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
-  const [showDetails, setShowDetails] = useState(false);
-
-  const toggleDetails = () => setShowDetails(!showDetails);
+  const { language } = useLanguage();
 
   return (
-    <div
-      className="p-4 m-4 border rounded-lg shadow-lg hover:bg-gray-100 transition-all cursor-pointer"
-      onClick={toggleDetails}
-    >
-      <h2 className="text-xl font-semibold">{experience.title}</h2>
-      <p className="text-gray-600">{experience.company}</p>
-      {showDetails && <p className="text-gray-800 mt-4">{experience.details}</p>}
+    <div className="p-4 m-4 border rounded-lg shadow-lg hover:bg-gray-100 transition-all cursor-pointer">
+      <h2 className="text-xl font-semibold">{experience.title[language]}</h2>
+      <p className="text-gray-600">{experience.company[language]}</p>
+      <p className="text-gray-800 mt-4">{experience.details[language]}</p>
     </div>
   );
 };
