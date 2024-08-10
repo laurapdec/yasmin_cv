@@ -1,26 +1,35 @@
+// src/App.tsx
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Layout from './components/Layout';
+import ExperienceCard from './components/ExperienceCard';
 
-function App() {
+const experiences = [
+  {
+    title: 'Software Engineer',
+    company: 'Tech Corp',
+    details: 'Worked on various projects involving web development.',
+  },
+  {
+    title: 'Frontend Developer',
+    company: 'Web Solutions',
+    details: 'Focused on creating responsive designs and user-friendly interfaces.',
+  },
+  // Add more experiences here
+];
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-8">My CV</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {experiences.map((exp, index) => (
+            <ExperienceCard key={index} experience={exp} />
+          ))}
+        </div>
+      </div>
+    </Layout>
   );
-}
+};
 
 export default App;
