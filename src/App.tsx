@@ -9,19 +9,19 @@ import Languages from './components/Languages';
 import Hobbies from './components/Hobbies';
 import { LanguageProvider } from './context/LanguageContext';
 import { ContactInfoProvider } from './context/ContactInfoContext';
-import ContactInfo from './components/ContactInfo';
+import NavBar from './components/NavBar';
 
 const App: React.FC = () => {
   return (
     <LanguageProvider>
       <ContactInfoProvider>
+      <NavBar />
         <Layout>
           <div className="md:col-span-1 space-y-8">
-            <ContactInfo />
-            <AboutMe /> {/* Directly fetches its data */}
-            <Skills />
-            <Hobbies />
+            <AboutMe /> 
             <Languages />
+            <Skills /> 
+            <Hobbies />
           </div>
           <div className="md:col-span-2 space-y-8">
             <ExperienceList />
