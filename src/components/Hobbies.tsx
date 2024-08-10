@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { getHobbies } from '../services/firestoreService';
+import { useLanguage } from '../context/LanguageContext';
 
 interface Hobby {
   name: string;
   description?: string;
+  language: string;
 }
 
 const Hobbies: React.FC = () => {
   const [hobbies, setHobbies] = useState<Hobby[]>([]);
   const [loading, setLoading] = useState(true);
+  const { language } = useLanguage(); // Get the current language from the context
 
   useEffect(() => {
     const fetchHobbies = async () => {
       try {
-        const data = await getHobbies();
+        const data = await getHobbies(language);
         setHobbies(data as Hobby[]);
       } catch (error) {
         console.error('Error fetching hobbies data:', error);
@@ -36,7 +39,6 @@ const Hobbies: React.FC = () => {
         {hobbies.map((hobby, index) => (
           <li key={index} className="text-gray-700">
             {hobby.name}
-            {hobby.description && `: ${hobby.description}`}
           </li>
         ))}
       </ul>

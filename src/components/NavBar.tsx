@@ -1,32 +1,30 @@
+// src/components/NavBar.tsx
 import React from 'react';
-import { useContactInfo } from '../context/ContactInfoContext';
+import { useLanguage } from '../context/LanguageContext';
 
-const Navbar: React.FC = () => {
-  const { contactInfo, loading } = useContactInfo();
+const NavBar: React.FC = () => {
+  const { language, setLanguage } = useLanguage();
 
-  if (loading || !contactInfo) {
-    return <div>Loading...</div>;
-  }
+  const handleLanguageChange = (lang: string) => {
+    setLanguage(lang);
+  };
 
   return (
-    <nav className="bg-gray-100 p-4 flex justify-between items-center shadow">
-      <div className="flex items-center space-x-4">
-        <img
-          src={contactInfo.image}  // Using the image from Contact Info
-          alt={contactInfo.name}
-          className="h-12 w-12 rounded-full object-cover"
-        />
-        <h1 className="text-2xl font-bold">{contactInfo.name}</h1>
-      </div>
-      <div>
-        <select className="p-2 border rounded">
-          <option>English</option>
-          <option>Portuguese</option>
-          <option>French</option>
-        </select>
+    <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
+      <div className="text-lg font-bold">My CV</div>
+      <div className="space-x-4">
+        <button onClick={() => handleLanguageChange('en')} className={language === 'en' ? 'font-bold' : ''}>
+          English
+        </button>
+        <button onClick={() => handleLanguageChange('pt')} className={language === 'pt' ? 'font-bold' : ''}>
+          Português
+        </button>
+        <button onClick={() => handleLanguageChange('fr')} className={language === 'fr' ? 'font-bold' : ''}>
+          Français
+        </button>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default NavBar;

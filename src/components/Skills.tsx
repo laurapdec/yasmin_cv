@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 interface Skill {
   name: string;
   proficiency: number;
+  language: string;
 }
 
 const Skills: React.FC = () => {
